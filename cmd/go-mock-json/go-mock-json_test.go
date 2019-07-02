@@ -15,12 +15,6 @@ type TestJSON struct {
 	got    string
 }
 
-type TestAPI struct {
-	port     int
-	endpoint string
-	dataJSON string
-}
-
 func TestPrettyprint_empty(t *testing.T) {
 	t.Log("Testing JSON Parsing and Pretty Print")
 	var data map[string]interface{}

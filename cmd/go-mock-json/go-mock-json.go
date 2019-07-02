@@ -83,15 +83,15 @@ func (api *APIdetails) responseHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Credentials", "true")
 	w.Header().Set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-	r.ParseForm()
 	log.Println("method:", r.Method)
 	log.Println("path:", r.URL.Path)
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(200)
 	JSONstring := api.dataJSON
-	b := []byte(JSONstring)
-	w.Write(b)
-
+	_, err := fmt.Fprint(w, JSONstring)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func prettyprint(data interface{}) string {
