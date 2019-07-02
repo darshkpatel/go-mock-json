@@ -11,11 +11,7 @@ import (
 	"strconv"
 )
 
-const (
-	HeaderContentType              = "Content-Type"
-	MIMEApplicationJSONCharsetUTF8 = "application/json; charset=UTF-8"
-)
-
+//API - Struct to store api details
 type API struct {
 	port     int
 	endpoint string
@@ -25,7 +21,8 @@ type API struct {
 var api API
 
 func main() {
-	//Parse CLI Flags
+
+	//Define CLI Flags
 	var (
 		srcFile   = flag.String("json", "", "Path to json file to serve")
 		port      = flag.Int("port", 8080, "Port to bind mock json server")
@@ -43,34 +40,37 @@ func main() {
 		os.Exit(1)
 	}
 
-	//Check json file path
-
+	//Check JSON file path
 	if _, err := os.Stat(*srcFile); err != nil {
 		log.Fatal(*srcFile + " does not exist")
 	}
 
+	// Read JSON file
 	raw, err := ioutil.ReadFile(*srcFile)
 	if err != nil {
 		log.Fatal(err.Error())
 	}
 	log.Println("Loading JSON file " + *srcFile)
+
+	//Parse JSON
 	var data map[string]interface{}
 	if err := json.Unmarshal(raw, &data); err != nil {
 		log.Fatal(err)
+	} else {
+		log.Println("Loaded JSON File")
 	}
 
 	api.endpoint = *endpoint
 	api.port = *port
 	api.dataJSON = data
 
-	log.Println("Loaded JSON File")
-
+	//Prints JSON to console if flag is set
 	if *printJSON {
 		fmt.Println(prettyPrint(api.dataJSON))
 	}
 
 	//Start HTTP SERVER
-	log.Printf("Serving File %v on port %v", *srcFile, api.port)
+	log.Printf("Starting server to serve File: %v on Port: %v", *srcFile, api.port)
 	http.HandleFunc(api.endpoint, Response)
 
 	log.Fatal(http.ListenAndServe(":"+strconv.Itoa(api.port), nil))
@@ -86,7 +86,7 @@ func Response(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 	fmt.Println("method:", r.Method)
 	fmt.Println("path:", r.URL.Path)
-	w.Header().Set(HeaderContentType, MIMEApplicationJSONCharsetUTF8)
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(200)
 	s := prettyPrint(api.dataJSON)
 	b := []byte(s)
@@ -95,11 +95,11 @@ func Response(w http.ResponseWriter, r *http.Request) {
 }
 
 func prettyPrint(data interface{}) string {
-	prettyJson, err := json.MarshalIndent(data, " ", "    ")
+	prettyJSON, err := json.MarshalIndent(data, " ", "    ")
 	if err != nil {
 		log.Fatal(err)
 		return ""
 	}
 
-	return string(prettyJson)
+	return string(prettyJSON)
 }
