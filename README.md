@@ -5,7 +5,7 @@ A cross-platform minimal JSON mock server written in golang
 To Build and run binary  
 ```  git clone https://github.com/darshkpatel/go-mock-json && cd go-mock-json  ```
 
-``` go build cmd/go-mock-json/main.go ```
+``` go build cmd/go-mock-json/go-mock-json.go ```
 
 ```./cmd/go-mock-json/go-mock-json```
 
