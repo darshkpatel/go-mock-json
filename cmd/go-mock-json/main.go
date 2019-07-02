@@ -71,13 +71,13 @@ func main() {
 
 	//Start HTTP SERVER
 	log.Printf("Starting server to serve File: %v on Port: %v", *srcFile, api.port)
-	http.HandleFunc(api.endpoint, Response)
+	http.HandleFunc(api.endpoint, response)
 
 	log.Fatal(http.ListenAndServe(":"+strconv.Itoa(api.port), nil))
 
 }
 
-func Response(w http.ResponseWriter, r *http.Request) {
+func response(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Credentials", "true")
