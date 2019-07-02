@@ -1,6 +1,19 @@
 # go-mock-json
 A cross-platform minimal JSON mock server written in golang
 
+## Compiling and Installation (UNIX)
+To Build and run binary  
+```  git clone https://github.com/darshkpatel/go-mock-json && cd go-mock-json  ```
+
+``` go build cmd/go-mock-json/main.go ```
+
+```./cmd/go-mock-json/go-mock-json```
+
+To install:
+
+You can either copy the binary to ```bin``` directory of your system OR add go-mock-json to PATH
+
+
 ## Usage
 ```
 Usage of ./go-mock-json:
@@ -12,7 +25,7 @@ Usage of ./go-mock-json:
         
   -port int
     	Port to bind mock json server (default 8080)
-        
+
   -show
     	Pretty Print JSON
 ```
