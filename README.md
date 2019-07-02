@@ -1,5 +1,7 @@
 <img src="img/banner.png">
 
+[![Build Status](https://travis-ci.com/darshkpatel/go-mock-json.svg?branch=master)](https://travis-ci.com/darshkpatel/go-mock-json)
+
 ## Compiling and Installation (UNIX)
 To Build and run binary  
 ```  git clone https://github.com/darshkpatel/go-mock-json && cd go-mock-json  ```
