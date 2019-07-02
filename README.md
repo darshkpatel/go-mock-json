@@ -1,5 +1,4 @@
-# go-mock-json
-A cross-platform minimal JSON mock server written in golang
+<img src="img/banner.png">
 
 ## Compiling and Installation (UNIX)
 To Build and run binary  
