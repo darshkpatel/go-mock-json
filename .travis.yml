@@ -28,10 +28,5 @@ script:
   - golangci-lint run       # run a bunch of code checkers/linters in parallel
   - go test ./cmd/go-mock-json   # Run all the tests with the race detector enabled
 
-deploy:
-- provider: script
-  skip_cleanup: false
-  script: curl -sL https://git.io/goreleaser | bash
-  on:
-    tags: true
-    condition: $TRAVIS_OS_NAME = linux
+after_success:
+  test -n "$TRAVIS_TAG" && curl -s https://raw.githubusercontent.com/goreleaser/get/master/latest | bash
