@@ -13,10 +13,7 @@ import (
 
 const (
 	HeaderContentType              = "Content-Type"
-	MIMEApplicationJSON            = "application/json"
-	MIMEApplicationJSONCharsetUTF8 = MIMEApplicationJSON + "; " + "charset=UTF-8"
-	MIMETextPlain                  = "text/plain"
-	MIMETextPlainCharsetUTF8       = MIMETextPlain + "; " + "charset=UTF-8"
+	MIMEApplicationJSONCharsetUTF8 = "application/json; charset=UTF-8"
 )
 
 type API struct {
