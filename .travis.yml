@@ -3,6 +3,11 @@ language: go
 go:
   - 1.12.x
 
+env:
+  - GO111MODULE=on
+  - GOFLAGS='-mod vendor'
+
+
 # Only clone the most recent commit.
 git:
   depth: 1
