@@ -11,14 +11,12 @@ import (
 	"strconv"
 )
 
-//API - Struct to store api details
-type API struct {
+//APIdetails - Struct to store api details
+type APIdetails struct {
 	port     int
 	endpoint string
 	dataJSON string
 }
-
-var api API
 
 func main() {
 
@@ -60,6 +58,7 @@ func main() {
 		log.Println("Loaded JSON File")
 	}
 
+	var api APIdetails
 	api.endpoint = *endpoint
 	api.port = *port
 	api.dataJSON = prettyprint(data)
@@ -71,21 +70,22 @@ func main() {
 
 	//Start HTTP SERVER
 	log.Printf("Starting server to serve File: %v on Port: %v", *srcFile, api.port)
-	http.HandleFunc(api.endpoint, response)
+
+	http.HandleFunc(api.endpoint, api.responseHandler)
 
 	log.Fatal(http.ListenAndServe(":"+strconv.Itoa(api.port), nil))
 
 }
 
-func response(w http.ResponseWriter, r *http.Request) {
+func (api *APIdetails) responseHandler(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Credentials", "true")
 	w.Header().Set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
 	r.ParseForm()
-	fmt.Println("method:", r.Method)
-	fmt.Println("path:", r.URL.Path)
+	log.Println("method:", r.Method)
+	log.Println("path:", r.URL.Path)
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(200)
 	JSONstring := api.dataJSON
