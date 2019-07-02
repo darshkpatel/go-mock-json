@@ -28,3 +28,8 @@ Usage of ./go-mock-json:
   -show
     	Pretty Print JSON
 ```
+
+### To-Do
+
+[] Improve Logging
+[] Improve URL Handling and error messages
