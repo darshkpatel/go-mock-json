@@ -15,7 +15,7 @@ import (
 type API struct {
 	port     int
 	endpoint string
-	dataJSON interface{}
+	dataJSON string
 }
 
 var api API
@@ -62,11 +62,11 @@ func main() {
 
 	api.endpoint = *endpoint
 	api.port = *port
-	api.dataJSON = data
+	api.dataJSON = prettyprint(data)
 
 	//Prints JSON to console if flag is set
 	if *printJSON {
-		fmt.Println(prettyPrint(api.dataJSON))
+		fmt.Println(api.dataJSON)
 	}
 
 	//Start HTTP SERVER
@@ -88,13 +88,13 @@ func response(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("path:", r.URL.Path)
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(200)
-	s := prettyPrint(api.dataJSON)
-	b := []byte(s)
+	JSONstring := api.dataJSON
+	b := []byte(JSONstring)
 	w.Write(b)
 
 }
 
-func prettyPrint(data interface{}) string {
+func prettyprint(data interface{}) string {
 	prettyJSON, err := json.MarshalIndent(data, " ", "    ")
 	if err != nil {
 		log.Fatal(err)
