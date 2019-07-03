@@ -88,7 +88,7 @@ func (api *APIdetails) responseHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
 	log.Printf("%v - %v \n", r.Method, r.URL.Path)
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-	if (api.endpoint != "" && api.endpoint == r.URL.Path) || (api.allPaths == true) {
+	if (api.endpoint != "" && api.endpoint == r.URL.Path) || (api.allPaths) {
 		w.WriteHeader(200)
 		JSONstring := api.dataJSON
 		_, err := fmt.Fprint(w, JSONstring)
