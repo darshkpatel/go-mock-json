@@ -2,7 +2,13 @@
 
 [![Build Status](https://travis-ci.com/darshkpatel/go-mock-json.svg?branch=master)](https://travis-ci.com/darshkpatel/go-mock-json)
 
-## Compiling and Installation (UNIX)
+## Installation
+
+You can download one of the compiled binaries from the [Releases Page](https://github.com/darshkpatel/go-mock-json/releases) and add it to the system PATH or copy it to the bin folder.
+
+You can also compile from source using the instructions mentioned below
+
+## Compiling from Source (UNIX)
 To Build and run binary  
 ```  git clone https://github.com/darshkpatel/go-mock-json && cd go-mock-json  ```
 
@@ -32,6 +38,5 @@ Usage of ./go-mock-json:
 ```
 
 ### To-Do
-
-[] Improve Logging
-[] Improve URL Handling and error messages
+* Improve Logging
+* Improve URL Handling and error messages
