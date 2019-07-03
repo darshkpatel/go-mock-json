@@ -1,6 +1,20 @@
 <img src="img/banner.png">
 
-[![Build Status](https://travis-ci.com/darshkpatel/go-mock-json.svg?branch=master)](https://travis-ci.com/darshkpatel/go-mock-json)
+<p align="center" >
+
+<a href="https://travis-ci.com/darshkpatel/go-mock-json">
+<img src="https://travis-ci.com/darshkpatel/go-mock-json.svg?branch=master">
+</a>
+
+<a href="https://github.com/darshkpatel/go-mock-json/releases">
+<img src="https://img.shields.io/github/release/darshkpatel/go-mock-json.svg">
+</a>
+
+<a href="https://github.com/darshkpatel/go-mock-json/blob/master/LICENSE.md">
+<img src="https://img.shields.io/github/license/darshkpatel/go-mock-json.svg?color=yellow">
+</a>
+
+</p>
 
 ## Installation
 
