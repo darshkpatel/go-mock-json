@@ -16,6 +16,7 @@ type APIdetails struct {
 	port     int
 	endpoint string
 	dataJSON string
+	allPaths bool
 }
 
 func main() {
@@ -25,6 +26,7 @@ func main() {
 		srcFile   = flag.String("json", "", "Path to json file to serve")
 		port      = flag.Int("port", 8080, "Port to bind mock json server")
 		printJSON = flag.Bool("show", false, "Pretty Print JSON")
+		allPaths  = flag.Bool("allpaths", false, "Serve JSON on all URL paths")
 		endpoint  = flag.String("endpoint", "/", "endpoint to serve json at, eg: /api/json ")
 	)
 
@@ -61,6 +63,7 @@ func main() {
 	var api APIdetails
 	api.endpoint = *endpoint
 	api.port = *port
+	api.allPaths = *allPaths
 	api.dataJSON = prettyprint(data)
 
 	//Prints JSON to console if flag is set
@@ -83,15 +86,25 @@ func (api *APIdetails) responseHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Credentials", "true")
 	w.Header().Set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-	log.Println("method:", r.Method)
-	log.Println("path:", r.URL.Path)
+	log.Printf("%v - %v \n", r.Method, r.URL.Path)
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-	w.WriteHeader(200)
-	JSONstring := api.dataJSON
-	_, err := fmt.Fprint(w, JSONstring)
-	if err != nil {
-		log.Fatal(err)
+	if (api.endpoint != "" && api.endpoint == r.URL.Path) || (api.allPaths == true) {
+		w.WriteHeader(200)
+		JSONstring := api.dataJSON
+		_, err := fmt.Fprint(w, JSONstring)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+	} else {
+		w.WriteHeader(404)
+		JSONstring := "404 Not Found"
+		_, err := fmt.Fprint(w, JSONstring)
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
+
 }
 
 func prettyprint(data interface{}) string {
