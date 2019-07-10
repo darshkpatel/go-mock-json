@@ -86,7 +86,7 @@ func (api *APIdetails) responseHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Credentials", "true")
 	w.Header().Set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-	log.Printf("%v - %v \n", r.Method, r.URL.Path)
+	log.Printf("%v : %v - %v \n", readUserIP(r), r.Method, r.URL.Path)
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	if (api.endpoint != "" && api.endpoint == r.URL.Path) || (api.allPaths) {
 		w.WriteHeader(200)
@@ -105,6 +105,17 @@ func (api *APIdetails) responseHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
+}
+
+func readUserIP(r *http.Request) string {
+	IPAddress := r.Header.Get("X-Real-Ip")
+	if IPAddress == "" {
+		IPAddress = r.Header.Get("X-Forwarded-For")
+	}
+	if IPAddress == "" {
+		IPAddress = r.RemoteAddr
+	}
+	return IPAddress
 }
 
 func prettyprint(data interface{}) string {
