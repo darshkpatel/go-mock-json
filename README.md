@@ -18,7 +18,11 @@
 
 ## Installation
 
-You can download one of the compiled binaries from the [Releases Page](https://github.com/darshkpatel/go-mock-json/releases) and add it to the system PATH or copy it to the bin folder.
+Easiest way to install this , is by executing the following command if you have golang setup on your machine 
+
+`go get -u github.com/darshkpatel/go-mock-json/cmd/go-mock-json`
+
+You can also download one of the compiled binaries from the [Releases Page](https://github.com/darshkpatel/go-mock-json/releases) and add it to the system PATH or copy it to the bin folder.
 
 You can also compile from source using the instructions mentioned below
 
