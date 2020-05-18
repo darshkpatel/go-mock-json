@@ -14,6 +14,9 @@
 <img src="https://img.shields.io/github/license/darshkpatel/go-mock-json.svg?color=yellow">
 </a>
 
+<a href="https://www.codefactor.io/repository/github/darshkpatel/go-mock-json">
+<img src="https://www.codefactor.io/repository/github/darshkpatel/go-mock-json/badge" alt="CodeFactor" />
+</a>
 
 </p>
 
